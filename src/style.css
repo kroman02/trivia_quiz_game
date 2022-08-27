@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.appContainer {
+    background-color: grey;
+    min-width: 200px;
+    min-height: 200px;
+}
+
+.triviaContainer{
+    background-color: rgb(255, 195, 195);
+}
+
+.questionContainer {
+    background-color: aqua;
+    margin: 10px;
+    padding: 5px;
+}
+
+.answer {
+    padding: 5px;
+    margin-right: 5px;
+}
+
+.answer.selected {
+    background-color: red;
+}
