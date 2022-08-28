@@ -5,7 +5,7 @@ export default function Header () {
 
     return (
         <header >
-            <div><h1>Trivia</h1></div>
+            <div><h1 className="logo">TRIVIA</h1></div>
         </header>
     )
 

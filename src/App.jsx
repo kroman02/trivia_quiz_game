@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import './style.css'
 import StartPage from './components/StartPage.jsx'
 import Trivia from './components/Trivia.jsx'
+import Header from './components/Header.jsx'
 import {nanoid} from 'nanoid'
 
 function App() {
@@ -9,9 +10,10 @@ function App() {
   const [questions, setQuestions] = useState([])
   const [gameOver, setGameOver] = useState(false)
   const [correctAnswersGiven, setCorrectAnswersGiven] = useState(0)
+  const [answeredCount, setAnsweredCount] = useState(0)
 
   useEffect(()=>{
-    const parsedData = fetch("https://opentdb.com/api.php?amount=3")
+    const parsedData = fetch("https://opentdb.com/api.php?amount=5")
     .then(response => response.json())
     .then(data => setQuestions(parseData(data.results)))
   }, [])
@@ -71,17 +73,28 @@ function App() {
         
       })
     })
-    
+    countAnsweredQuestions()
+  }
+
+  useEffect(() => {
+    countAnsweredQuestions()
+  }, [questions])
+
+  const countAnsweredQuestions = () => {
+      const answered = questions.filter(question => question.selectedAnswer.length > 0).length
+      setAnsweredCount(answered)
   }
 
   console.log(questions)
 
 
   return (
-    questions.length > 0 &&
-    <div className="appContainer">
-      <h1>app container</h1>
-      <Trivia questions={questions} handleClick={questionSelection} />
+    <div className="mainContainer">
+      <Header />
+      {questions.length > 0 &&
+      <div className="appContainer">
+        <Trivia questions={questions} handleClick={questionSelection} answeredCount={answeredCount}  />
+      </div>}
     </div>
   )
   
