@@ -11,16 +11,19 @@ function App() {
   const [gameOver, setGameOver] = useState(false)
   const [correctAnswersGiven, setCorrectAnswersGiven] = useState(0)
   const [answeredCount, setAnsweredCount] = useState(0)
-  
+  const [gameStarted, setGameStarted] = useState(false)
+  const [category, setCategory] = useState("https://opentdb.com/api.php?amount=5")
   // CSS FLAGS
   const [error, setError] = useState(false)
   const [shake, setShake] = useState(false)
 
+
+//https://opentdb.com/api.php?amount=5
   useEffect(()=>{
-    const parsedData = fetch("https://opentdb.com/api.php?amount=5")
+    const parsedData = fetch(category)
     .then(response => response.json())
     .then(data => setQuestions(parseData(data.results)))
-  }, [])
+  }, [gameStarted])
 
   function parseData(results){
 
@@ -91,6 +94,7 @@ function App() {
       setShake(true)
     }else{
       const correctAnswersCount = questions.filter(question => question.correctAnswer === question.selectedAnswer).length
+      setCorrectAnswersGiven(correctAnswersCount)
       setGameOver(true)
       console.log(correctAnswersCount)
     }
@@ -104,28 +108,54 @@ function App() {
       setAnsweredCount(answered)
   }
 
+  //CSS button error
   function onMouseLeaveShakeOff(){
       setShake(false)
   }
   console.log(questions)
+  console.log(category)
+
+  const toggleStart = (event) => {
+    
+    setCategory(() => {
+      const baseCategory = "https://opentdb.com/api.php?amount=5"
+      return baseCategory + `&category=${event.target.value}`
+    })
+    setGameStarted(!gameStarted)
+    setGameOver(false)
+    setQuestions([])
+    
+  }
 
 
   return (
-    <div className="mainContainer">
-      <Header />
-      {questions.length > 0 &&
+    <>
+    { 
+      <div className="mainContainer">
+      {
+      gameStarted && questions.length > 0
+      ?
+      <>
+      <Header startGameHandler={toggleStart}/>
       <div className="appContainer">
         <Trivia questions={questions} 
         handleClick={questionSelection} 
         answeredCount={answeredCount} 
+        correctAnswersGiven={correctAnswersGiven}
+        startGameHandler={toggleStart}
         error={error} 
         shake={shake}
         gameOver={gameOver}
         checkAnswers={checkAnswers}
         onMouseLeaveShakeOff={onMouseLeaveShakeOff}/>
-        
-      </div>}
-    </div>
+      </div>
+      </>
+      :
+      <StartPage startGameHandler={toggleStart}/>
+      }
+
+    </div>}
+    </>
   )
   
 

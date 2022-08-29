@@ -244,7 +244,82 @@ header {
     transition: 0ms;
 }
 
+.start_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: #fff;
+    height: 100%;
+    margin-top: 50px;
+    padding: 2rem;
+    border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
+}
 
+.start_container > h1{
+font-family: 'Paytone One', sans-serif;
+font-size: 3.5rem;
+color: #b328c5;
+padding: 0;
+margin-bottom: 0;
+}
+
+.start_container > h3 {
+    margin-top: -10px;
+    padding: 0;
+    font-size: 1.1rem;
+}
+
+.startButton{
+    width: fit-content;
+}
+
+.categoryButton {
+    padding: 0.8rem 4rem;
+    border: #dcd2f4 3px solid;
+    background: #fff;
+    border-radius: 15px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.categoryButton:hover {
+background: #dcd2f4;
+
+}
+
+.col-span-2 {
+    grid-column: span 2;
+}
+
+
+.categories {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 50px;
+    margin-bottom: 25px
+}
+
+.cat_selection {
+    grid-column: span 2;
+}
+
+.feedback {
+    font-size: 1.3rem;
+    color:rgb(13, 212, 13);
+    font-weight: 700;
+}
+
+.gameOverSection {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.gameOverSection > button{
+    margin-top: 15px;
+}
 
 /* font-family: 'Paytone One', sans-serif;
 font-family: 'Zen Kurenaido', sans-serif;*/

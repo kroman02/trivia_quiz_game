@@ -1,12 +1,12 @@
 import React from 'react'
 import '../style.css'
 
-export default function Header () {
+export default function Header (props) {
 
     return (
         <header >
             <div><h1 className="logo">TRIVIA</h1></div>
-            <button className="changeCategory">Change Category</button>
+            <button onClick={props.startGameHandler} className="changeCategory">Change Category</button>
         </header>
     )
 
