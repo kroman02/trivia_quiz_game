@@ -11,6 +11,10 @@ function App() {
   const [gameOver, setGameOver] = useState(false)
   const [correctAnswersGiven, setCorrectAnswersGiven] = useState(0)
   const [answeredCount, setAnsweredCount] = useState(0)
+  
+  // CSS FLAGS
+  const [error, setError] = useState(false)
+  const [shake, setShake] = useState(false)
 
   useEffect(()=>{
     const parsedData = fetch("https://opentdb.com/api.php?amount=5")
@@ -57,7 +61,7 @@ function App() {
 
 
   const questionSelection = (event, questionId, answerId)=>{
-
+    if(gameOver){return}
     setQuestions(oldQuestions => {
       return oldQuestions.map(oldQuestion => {
         
@@ -73,18 +77,36 @@ function App() {
         
       })
     })
-    countAnsweredQuestions()
   }
 
   useEffect(() => {
     countAnsweredQuestions()
+    setError(false)
   }, [questions])
+
+
+  const checkAnswers = () => {
+    if(answeredCount < questions.length){
+      setError(true)
+      setShake(true)
+    }else{
+      const correctAnswersCount = questions.filter(question => question.correctAnswer === question.selectedAnswer).length
+      setGameOver(true)
+      console.log(correctAnswersCount)
+    }
+
+    
+
+  }
 
   const countAnsweredQuestions = () => {
       const answered = questions.filter(question => question.selectedAnswer.length > 0).length
       setAnsweredCount(answered)
   }
 
+  function onMouseLeaveShakeOff(){
+      setShake(false)
+  }
   console.log(questions)
 
 
@@ -93,7 +115,15 @@ function App() {
       <Header />
       {questions.length > 0 &&
       <div className="appContainer">
-        <Trivia questions={questions} handleClick={questionSelection} answeredCount={answeredCount}  />
+        <Trivia questions={questions} 
+        handleClick={questionSelection} 
+        answeredCount={answeredCount} 
+        error={error} 
+        shake={shake}
+        gameOver={gameOver}
+        checkAnswers={checkAnswers}
+        onMouseLeaveShakeOff={onMouseLeaveShakeOff}/>
+        
       </div>}
     </div>
   )

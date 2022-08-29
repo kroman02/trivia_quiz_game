@@ -125,6 +125,7 @@ header {
     background: linear-gradient(0deg, #881e96 33%, #881e96 100%);
     font-size: 1rem;
     padding: 0.9rem 2.2rem 0.9rem 2.2rem;
+    transition: 100ms;
 }
 
 .bottomSection {
@@ -148,6 +149,8 @@ header {
 }
 
 .answersContainer {
+    display: grid;
+    grid-template-columns: fit-content(25%) fit-content(25%) fit-content(25%) fit-content(25%);
     margin-bottom: 30px
 }
 
@@ -160,6 +163,85 @@ header {
 .mainContainer {
     width: 1100px;
     margin-bottom: 50px;
+}
+
+
+@keyframes shakeBtn {
+    0% {margin-left: 10px; margin-right: 0px}
+    20% {margin-left: 0px; margin-right: 10px}
+    40% {margin-left: 10px; margin-right: 0px}
+    60% {margin-left: 0px; margin-right: 10px}
+    80% {margin-left: 10px; margin-right: 0px}
+    90% {margin-left: 0px; margin-right: 10px}
+    100%{margin-left:0; margin-right: 0;}
+  }
+
+.submitQuestions.shake {
+    animation-name: shakeBtn;
+    animation-duration: 200ms;
+}
+
+.submitQuestions.errorbtn{
+    border: 2px red solid;
+}
+
+.error {
+    width: 100%;
+    text-align: center;
+    color: red;
+    margin-top: 15px;
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.red_num {
+    color: red;
+}
+
+.answer.gameover {
+    background: #f4f4f4;
+    color:#acacac;
+    border: solid 3px #f1f1f1;
+}
+
+.answer.gameover.correct {
+    background: rgb(13, 212, 13);
+    color: #fff;
+    font-weight: 800;
+    border: none;
+    border: solid 3px #8dfaa4;
+}
+
+.answer.gameover.wrong {
+    background: rgb(255, 67, 67);
+    border: none;
+    border: solid 3px #fcc3c3;
+    color: #fff;
+    font-weight: 800;
+}
+
+.changeCategory {
+    border: white 2px solid;
+    padding: 1rem 1rem 1rem 1rem;
+    background: none;
+    color: #fff;
+    border-radius: 10px;
+    margin-left: auto;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    transition: 300ms;
+}
+
+.changeCategory:hover {
+    background: #fff;
+    color:#b328c5;
+    transition: 300ms;
+} 
+
+.changeCategory:active {
+    background: #dedede;
+    border: #dedede 2px solid;
+    transition: 0ms;
 }
 
 

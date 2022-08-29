@@ -8,12 +8,18 @@ export default function Question(props) {
     
 
     function createAnswerElements(answers, questionId){
+
         return answers.map(answer => {
+
+
+            
+            
+
             return <button 
             key={answer.id} 
             value={answer.answer} 
             onClick={(event) => props.handleClick(event, questionId, answer.id)}
-            className={`answer ${answer.selected ? "selected" : ""}`}>
+            className={`answer ${props.gameOver ? (answer.selected ? (answer.correct ? "gameover correct" : "gameover wrong" ) : (answer.correct ? "gameover correct" : "gameover") ) : (answer.selected ? "selected" : "")}`}>
                 {answer.answer}
             </button>
          })
