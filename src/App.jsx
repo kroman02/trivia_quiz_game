@@ -4,6 +4,12 @@ import StartPage from './components/StartPage.jsx'
 import Trivia from './components/Trivia.jsx'
 import Header from './components/Header.jsx'
 import {nanoid} from 'nanoid'
+import {htmlDecode, shuffleAnswers} from './utilityFunctions.js'
+
+
+
+
+
 
 function App() {
 
@@ -33,7 +39,7 @@ function App() {
       const allAnswers = result.incorrect_answers.map(wrongAnswer => {
         return {
           id: nanoid(),
-          answer: wrongAnswer,
+          answer: htmlDecode(wrongAnswer),
           selected: false,
           correct: false
         }
@@ -42,20 +48,23 @@ function App() {
       //mapping correct answer
       const correctAnswer = {
         id: nanoid(),
-        answer: result.correct_answer,
+        answer: htmlDecode(result.correct_answer),
         selected: false,
         correct: true
       }
       //adding correct answer to allAnswers
       allAnswers.push(correctAnswer)
       
+      const shuffledAnswers = shuffleAnswers(allAnswers)
+    
+
       //assembling question
       return {
         id: nanoid(),
-        question: result.question,
+        question: htmlDecode(result.question),
         correctAnswer: result.correct_answer,
         selectedAnswer: '',
-        answers: allAnswers,
+        answers: shuffledAnswers,
         answeredCorrectly: false
           }
     })

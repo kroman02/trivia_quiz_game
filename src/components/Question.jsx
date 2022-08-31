@@ -5,16 +5,9 @@ import React from 'react'
 
 export default function Question(props) {
 
-    
-
     function createAnswerElements(answers, questionId){
 
         return answers.map(answer => {
-
-
-            
-            
-
             return <button 
             key={answer.id} 
             value={answer.answer} 
@@ -25,10 +18,10 @@ export default function Question(props) {
          })
     }
 
-
-    const questionElements = props.questions.map(question => {
+     const questionElements = props.questions.map(question => {
     
         const answerElements = createAnswerElements(question.answers, question.id)
+        
         
         return (<div key={question.id} className="questionContainer">
                     <p className="questionText">{question.question}</p>
