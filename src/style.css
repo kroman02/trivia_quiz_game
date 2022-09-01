@@ -339,6 +339,8 @@ background: #dcd2f4;
 
 @media (max-width: 700px){
 
+
+
     .answersContainer {
         display: grid;
         grid-template-columns: 1fr;
@@ -348,6 +350,25 @@ background: #dcd2f4;
 
     .submitQuestions{
         font-size: 1rem;
+    }
+
+    .categories {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-top: 50px;
+        margin-bottom: 25px
+    }
+    
+    .cat_selection {
+        grid-column: span 1;
+    }
+    .col-span-2 {
+        grid-column: span 1;
+    }
+    .start_container{
+        width: 100;
+        padding: 2rem;
     }
 }
 
